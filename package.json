@@ -1,0 +1,32 @@
+{
+    "name": "lalrpop-syntax-highlight",
+    "displayName": "Lalrpop Syntax Highlight",
+    "description": "Syntax Highlighting for LALRPOP (Rust parser generator)",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.65.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Guyutongxue/VSC_LalrpopHighlight"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "lalrpop",
+            "aliases": ["LALRPOP", "lalrpop"],
+            "extensions": ["lalrpop"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "lalrpop",
+            "scopeName": "source.lalrpop",
+            "path": "./syntaxes/lalrpop.tmLanguage.json",
+            "embeddedLanguages": {
+                "meta.embedded.starter": "rust"
+            }
+        }]
+    }
+}
