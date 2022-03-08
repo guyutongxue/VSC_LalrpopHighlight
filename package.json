@@ -2,7 +2,7 @@
     "name": "lalrpop-syntax-highlight",
     "displayName": "Lalrpop Syntax Highlight",
     "description": "Syntax Highlighting for LALRPOP (Rust parser generator)",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "guyutongxue",
     "engines": {
         "vscode": "^1.65.0"

@@ -281,12 +281,37 @@
                 },
                 {
                     "include": "#lalrpop-rule"
+                },
+                {
+                    "include": "#lalrpop-extern"
                 }
             ]
         },
         "lalrpop-grammar": {
-            "match": "\\b(grammar)\\b",
-            "name": "keyword.control.grammar"
+            "name": "meta.other.statement.grammar",
+            "begin": "\\b(grammar)\\b",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.grammar"
+                }
+            },
+            "end": ";",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.terminator.grammar"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#gtypes"
+                },
+                {
+                    "include": "#lifetimes"
+                },
+                {
+                    "include": "#types"
+                }
+            ]
         },
         "lalrpop-global-match": {
             "begin": "\\b(match)\\s*(\\{)",
@@ -302,32 +327,19 @@
             "name": "support.other.match",
             "patterns": [
                 {
-                    "include": "#lalrpop-block"
-                },
-                {
-                    "include": "#lalrpop-exp"
-                },
-                {
-                    "include": "#strings"
-                },
-                {
-                    "name": "keyword.operator.arrow.fat.lalrpop",
-                    "match": "=>"
-                },
-                {
-                    "name": "punctuation.comma.lalrpop",
-                    "match": ","
-                },
-                {
-                    "name": "support.variable.dash",
-                    "match": "_"
+                    "include": "#lalrpop-desc"
                 }
             ]
         },
         "lalrpop-block": {
-            "begin": "\\{",
+            "begin": "(=>)\\s*\\{",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.operator.arrow.fat.lalrpop"
+                }
+            },
             "end": "\\}",
-            "name": "support.other.expression.block",
+            "name": "support.other.rule.description.block",
             "patterns": [
                 {
                     "include": "#lalrpop-exp"
@@ -342,6 +354,16 @@
                 },
                 {
                     "include": "#comments"
+                },
+                {
+                    "begin": "\\{",
+                    "end": "\\}",
+                    "name": "support.other.expression.block",
+                    "patterns": [
+                        {
+                            "include": "#lalrpop-exp"
+                        }
+                    ]
                 },
                 {
                     "include": "#keywords"
@@ -389,13 +411,17 @@
                 },
                 {
                     "name": "support.other.rule.header",
-                    "match": "\\b([A-Za-z_][A-Za-z_0-9]*)\\s*:",
+                    "match": "\\b([A-Za-z_][A-Za-z_0-9]*)\\s*(<(.*)>)?\\s*:",
                     "captures": {
                         "1": {
                             "name": "entity.name.tag.token"
                         },
-                        "2": {
-                            "name": "entity.name.type.token"
+                        "3": {
+                            "patterns": [
+                                {
+                                    "include": "#types"
+                                }
+                            ]
                         }
                     }
                 },
@@ -430,12 +456,6 @@
                     "patterns": [
                         {
                             "include": "#lalrpop-desc"
-                        },
-                        {
-                            "include": "#lalrpop-block"
-                        },
-                        {
-                            "include": "#lalrpop-exp"
                         }
                     ]
                 }
@@ -444,21 +464,84 @@
         "lalrpop-desc": {
             "patterns": [
                 {
+                    "include": "#lalrpop-token"
+                },
+                {
+                    "include": "#lalrpop-block"
+                },
+                {
+                    "match": "=>",
+                    "name": "keyword.operator.arrow.fat.lalrpop"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.comma.lalrpop"
+                },
+                {
+                    "include": "#lalrpop-exp"
+                },
+                {
+                    "name": "support.variable.dash",
+                    "match": "_"
+                }
+            ]
+        },
+        "lalrpop-token": {
+            "name": "support.other.rule.token",
+            "begin": "<\\s*(([A-Za-z_][A-Za-z_0-9]*)\\s*:)?",
+            "beginCaptures": {
+                "2": {
+                    "name": "variable.other.token"
+                }
+            },
+            "end": "(\\*|\\?)?>",
+            "endCaptures": {
+                "1": {
+                    "name": "keyword.other.token.modifier.repeat"
+                }
+            },
+            "patterns": [
+                {
                     "include": "#strings"
                 },
                 {
-                    "name": "support.other.rule.token",
-                    "match": "<\\s*([A-Za-z_][A-Za-z_0-9]*)\\s*:\\s*([A-Za-z][A-Za-z_0-9]*)\\s*>",
-                    "captures": {
-                        "1": {
-                            "name": "variable.other.token"
+                    "match": "@(L|R)",
+                    "name": "keyword.other.token.modifier.lr"
+                },
+                {
+                    "begin": "\\(",
+                    "end": "\\)",
+                    "patterns": [
+                        {
+                            "include": "#strings"
                         },
-                        "2": {
-                            "name": "entity.name.tag.token"
+                        {
+                            "include": "#lalrpop-token"
                         }
-                    }
+                    ]
+                },
+                {
+                    "begin": "<",
+                    "end": ">",
+                    "patterns": [
+                        {
+                            "include": "#types"
+                        }
+                    ]
+                },
+                {
+                    "match": "[A-Za-z][A-Za-z_0-9]*",
+                    "name": "entity.name.tag.token"
                 }
             ]
+        },
+        "lalrpop-extern": {
+            "match": "\\b(extern)\\b",
+            "captures": {
+                "1": {
+                    "name": "keyword.other.extern.lalrpop"
+                }
+            }
         },
         "comments": {
             "patterns": [
