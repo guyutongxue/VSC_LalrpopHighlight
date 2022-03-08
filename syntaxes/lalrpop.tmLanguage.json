@@ -488,9 +488,12 @@
         },
         "lalrpop-token": {
             "name": "support.other.rule.token",
-            "begin": "<\\s*(([A-Za-z_][A-Za-z_0-9]*)\\s*:)?",
+            "begin": "<\\s*((mut)?\\s*([A-Za-z_][A-Za-z_0-9]*)\\s*:)?",
             "beginCaptures": {
                 "2": {
+                    "name": "storage.modifier.mut.rust"
+                },
+                "3": {
                     "name": "variable.other.token"
                 }
             },
