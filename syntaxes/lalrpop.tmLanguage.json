@@ -460,27 +460,8 @@
                     "include": "#comments"
                 },
                 {
-                    "match": "([\\s\\S]*)(=>\\??)",
-                    "captures": {
-                        "1": {
-                            "name": "support.other.rule.token-list",
-                            "patterns": [
-                                {
-                                    "include": "#strings"
-                                },
-                                {
-                                    "include": "#lalrpop-token"
-                                },
-                                {
-                                    "match": "[A-Za-z][A-Za-z_0-9]*",
-                                    "name": "entity.name.tag.token"
-                                }
-                            ]
-                        },
-                        "2": {
-                            "name": "keyword.operator.arrow.fat.lalrpop"
-                        }
-                    }
+                    "match": "=>\\??",
+                    "name": "keyword.operator.arrow.fat.lalrpop"
                 },
                 {
                     "include": "#lalrpop-token"

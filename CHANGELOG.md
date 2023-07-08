@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.4
+## 0.0.5 / 0.0.4
 - Fix some line comment not recognized. ([#3](https://github.com/Guyutongxue/VSC_LalrpopHighlight/issues/3))
 
 ## 0.0.3
