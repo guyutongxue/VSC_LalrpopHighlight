@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.0.4
+- Fix some line comment not recognized. ([#3](https://github.com/Guyutongxue/VSC_LalrpopHighlight/issues/3))
+
 ## 0.0.3
 - Add support for `mut` ([#2](https://github.com/Guyutongxue/VSC_LalrpopHighlight/pull/2))
 - Add support for `+`.
